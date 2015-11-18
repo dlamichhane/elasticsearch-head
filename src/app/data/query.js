@@ -21,7 +21,7 @@
 				from: 0,
 				size: this.config.size,
 				sort: [],
-				facets: {},
+				//facets: {},
 				version: true
 			};
 			this.defaultClause = this.addClause();
@@ -100,14 +100,14 @@
 						if (typeof indexToTypeToParentIdToHit[doc._index] == "undefined"){
 						indexToTypeToParentIdToHit[doc._index] = new Object();
 					}
-					
+
 					if (typeof indexToTypeToParentIdToHit[doc._index][doc._type] == "undefined"){
 						indexToTypeToParentIdToHit[doc._index][doc._type] = new Object();
 					}
-					
+
 					indexToTypeToParentIdToHit[doc._index][doc._type][doc._id] = doc;
 					});
-					
+
 					res.hits.hits.forEach(function(hit) {
 						if (typeof hit.fields != "undefined"){
 							if (typeof hit.fields._parent != "undefined"){
@@ -170,16 +170,16 @@
 				this.defaultClause = this.addClause();
 			}
 		},
-		addFacet: function(facet) {
-			var facetId = "f-" + this.refuid++;
-			this.search.facets[facetId] = facet;
-			this.refmap[facetId] = { facetId: facetId, facet: facet };
-			return facetId;
-		},
-		removeFacet: function(facetId) {
-			delete this.search.facets[facetId];
-			delete this.refmap[facetId];
-		},
+		// addFacet: function(facet) {
+		// 	var facetId = "f-" + this.refuid++;
+		// 	this.search.facets[facetId] = facet;
+		// 	this.refmap[facetId] = { facetId: facetId, facet: facet };
+		// 	return facetId;
+		// },
+		// removeFacet: function(facetId) {
+		// 	delete this.search.facets[facetId];
+		// 	delete this.refmap[facetId];
+		// },
 		_setClause: function(value, field, op, bool) {
 			var clause = {}, query = {};
 			if(op === "match_all") {
